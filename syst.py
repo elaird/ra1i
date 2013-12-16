@@ -1,11 +1,11 @@
-import utils
+from inputData import quadSum
 
 def load(data = None, mode = None) :
-#    lumiLikeValue = utils.quadSum({"lumi": 0.06, "deadEcal": 0.03, "lepVetoes": 0.025, "jesjer": 0.025, "pdf": 0.10}.values())
+#    lumiLikeValue = quadSum({"lumi": 0.06, "deadEcal": 0.03, "lepVetoes": 0.025, "jesjer": 0.025, "pdf": 0.10}.values())
 # SMS other than T1, T2
-    lumiLikeValue = utils.quadSum({"btagUncert": 0.035, "lumi": 0.06, "deadEcal": 0.03, "lepVetoes": 0.025, "jesjer": 0.025, "pdf": 0.10}.values())
+    lumiLikeValue = quadSum({"btagUncert": 0.035, "lumi": 0.06, "deadEcal": 0.03, "lepVetoes": 0.025, "jesjer": 0.025, "pdf": 0.10}.values())
  #T1, T2, cMSSM tb10 only
-#    lumiLikeValue = utils.quadSum({"btagUncert": 0.12, "lumi": 0.06, "deadEcal": 0.03, "lepVetoes": 0.025, "jesjer": 0.025, "pdf": 0.10}.values())
+#    lumiLikeValue = quadSum({"btagUncert": 0.12, "lumi": 0.06, "deadEcal": 0.03, "lepVetoes": 0.025, "jesjer": 0.025, "pdf": 0.10}.values())
 
 
     if mode==-1 :
@@ -142,7 +142,7 @@ def load(data = None, mode = None) :
             "sigmaMumuZ": tuple([0.10, 0.20, 0.40]),
 
             "k_qcd_nom"     : 2.96e-2,
-            "k_qcd_unc_inp" : utils.quadSum([0.61e-2, 0.463e-2])
+            "k_qcd_unc_inp" : quadSum([0.61e-2, 0.463e-2])
             }
 
     if mode==12400 :
@@ -162,7 +162,7 @@ def load(data = None, mode = None) :
             "sigmaMumuZ": tuple([0.10, 0.20, 0.40, 0.40]),
 
             "k_qcd_nom"     : 2.96e-2,
-            "k_qcd_unc_inp" : utils.quadSum([0.61e-2, 0.463e-2])
+            "k_qcd_unc_inp" : quadSum([0.61e-2, 0.463e-2])
             }
 
     if mode==237 :
@@ -182,7 +182,7 @@ def load(data = None, mode = None) :
             "sigmaMumuZ": tuple([0.20, 0.30, 0.70]),
 
             "k_qcd_nom"     : 2.96e-2,
-            "k_qcd_unc_inp" : utils.quadSum([0.61e-2, 0.463e-2])
+            "k_qcd_unc_inp" : quadSum([0.61e-2, 0.463e-2])
             }
 
     if type(mode)==tuple and len(mode)==1 :
