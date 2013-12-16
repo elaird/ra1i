@@ -81,7 +81,6 @@ def go(spec1={}, spec2={}, spec3={}, mode=None, stem=""):
 
     line = r.TLine()
 
-    leg = None
     for name in ["0b_le3j", "1b_le3j", "2b_le3j", "3b_le3j",
                  "0b_ge4j", "1b_ge4j", "2b_ge4j", "3b_ge4j",
                  "ge4b_ge4j"]:
@@ -145,16 +144,15 @@ def go(spec1={}, spec2={}, spec3={}, mode=None, stem=""):
 
                 h1.GetYaxis().SetRangeUser(0.0, 1.1*max(maxes))
 
-                if leg is None:
-                    leg = r.TLegend(0.65, 0.65, 0.85, 0.85)
-                    leg.SetBorderSize(0)
-                    leg.SetFillStyle(0)
-                    leg.AddEntry(h1, label1, "le")
-                    leg.AddEntry(h2, label2, "le")
-                    if h3:
-                        leg.AddEntry(h3, label3, "le")
-                    misc.append(leg)
+                leg = r.TLegend(0.65, 0.65, 0.85, 0.85)
+                leg.SetBorderSize(0)
+                leg.SetFillStyle(0)
+                leg.AddEntry(h1, label1, "le")
+                leg.AddEntry(h2, label2, "le")
+                if h3:
+                    leg.AddEntry(h3, label3, "le")
                 leg.Draw("same")
+                misc.append(leg)
 
             if mode == "ratios":
                 h2.Divide(h1)
@@ -189,13 +187,12 @@ def go(spec1={}, spec2={}, spec3={}, mode=None, stem=""):
                 r.gPad.SetLogx()
                 r.gPad.SetLogy()
 
-                if leg is None:
-                    leg = r.TLegend(0.15, 0.65, 0.45, 0.85)
-                    leg.SetBorderSize(0)
-                    leg.SetFillStyle(0)
-                    leg.AddEntry(one, "y = (%4.1f/%4.1f) x" % (lumi1, lumi2), "l")
-                    misc.append(leg)
+                leg = r.TLegend(0.15, 0.65, 0.45, 0.85)
+                leg.SetBorderSize(0)
+                leg.SetFillStyle(0)
+                leg.AddEntry(one, "y = (%4.1f/%4.1f) x" % (lumi1, lumi2), "l")
                 leg.Draw("same")
+                misc.append(leg)
 
 
             r.gPad.SetTickx()
@@ -226,10 +223,10 @@ if __name__ == "__main__":
            spec2={"mod": take9_BC, "label": "BC_R",  "lumiFactor": 1.0,    "byLumi": mode != "scatter"},
            )
 
-        go(mode=mode, stem="newdata",
-           spec1={"mod": take9_D,  "label": "D_R",  "lumiFactor": 1.0, "byLumi": mode != "scatter"},
-           spec2={"mod": take9_BC, "label": "BC_R", "lumiFactor": 1.0, "byLumi": mode != "scatter"},
-           )
+        #go(mode=mode, stem="newdata",
+        #   spec1={"mod": take9_D,  "label": "D_R",  "lumiFactor": 1.0, "byLumi": mode != "scatter"},
+        #   spec2={"mod": take9_BC, "label": "BC_R", "lumiFactor": 1.0, "byLumi": mode != "scatter"},
+        #   )
 
     go(mode="yields", stem="eras",
        spec1={"mod": take9_B, "label": "B_R", "lumiFactor": 1.0, "byLumi": True},
