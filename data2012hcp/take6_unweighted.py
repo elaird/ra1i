@@ -1,5 +1,4 @@
-from inputData import syst
-from data import data,scaled
+from inputData import data, scaled, syst
 
 #no weights
 

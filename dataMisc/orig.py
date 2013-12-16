@@ -1,6 +1,4 @@
-import utils
-from inputData import syst
-from data import data,scaled,excl
+from inputData import data, scaled, excl, syst, quadSum
 
 class data2011_55_v6(data) :
     """no odd-muon-veto"""
@@ -73,7 +71,7 @@ class data2011_55_v6(data) :
             "mcZmumuErr":                  (  6.76,    5.46,    4.22,   2.57,    1.9,   1.09,   0.16,  0.78),
             }
         self._mcStatError["mcZinvErr"] = self._mcStatError["mcZinvErrDB"]
-        #self._mcStatError["mcHadErr"] = tuple([utils.quadSum([ttwErr, zinvErr]) for ttwErr,zinvErr in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
+        #self._mcStatError["mcHadErr"] = tuple([quadSum([ttwErr, zinvErr]) for ttwErr,zinvErr in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
         self._purities = {
             "phot":                  (  None,    None,    0.98,   0.99,   0.99,   0.99,   0.99, 0.99),
             "mumu":                  (  0.89,    0.94,    0.97,   0.97,   0.97,   0.97,   0.97, 0.97),#old
@@ -159,7 +157,7 @@ class data_2011_4(data) :
             "mcZinvErr":            scaled((    20,      20,      20,     10,      5,      3,      3,     3), self.lumi()["had"] /self.lumi()["mcZinv"]),
             "mcMumuErr":            scaled((     4,       3,       3,      3,      2,      1,      1,     1), self.lumi()["mumu"]/self.lumi()["mcZmumu"]),
             }
-        self._mcStatError["mcHadErr"] = tuple([utils.quadSum([ttwErr, zinvErr]) for ttwErr,zinvErr in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
+        self._mcStatError["mcHadErr"] = tuple([quadSum([ttwErr, zinvErr]) for ttwErr,zinvErr in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
 
         self._purities = {
             "phot":                  (  0.92,    0.97,    0.99,   0.99,   0.99,   0.99,   0.99, 0.99),
@@ -272,7 +270,7 @@ class data2011_3(data) :
             "mcZinvErr":      scaled((    10,       7,       8,      5,      2,      1,      1,     1), self.lumi()["had"] /self.lumi()["mcZinv"]),
             "mcZmumuErr":     scaled((     4,       3,       3,      3,      2,      1,      1,     1), self.lumi()["mumu"]/self.lumi()["mcZmumu"]),
             }
-        self._mcStatError["mcHadErr"] = tuple([utils.quadSum([ttwErr, zinvErr]) for ttwErr,zinvErr in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
+        self._mcStatError["mcHadErr"] = tuple([quadSum([ttwErr, zinvErr]) for ttwErr,zinvErr in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
 
         self._purities = {
             "phot":                  (  0.92,    0.97,    0.99,   0.99,   0.99,   0.99,   0.99, 0.99),
@@ -346,7 +344,7 @@ class data_2010(data) :
             "sigmaMuonW": [0.30],
 
             "k_qcd_nom":2.96e-2, #2011
-            "k_qcd_unc_inp":utils.quadSum([0.61e-2, 0.463e-2]) #2011
+            "k_qcd_unc_inp":quadSum([0.61e-2, 0.463e-2]) #2011
             }
 
         self._systBins = {

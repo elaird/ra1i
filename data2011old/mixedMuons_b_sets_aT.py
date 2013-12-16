@@ -1,6 +1,5 @@
-from inputData import syst
-import utils
-from data import data,scaled,excl
+from inputData import data, scaled, excl, syst, quadSum
+
 
 class data_55_0btag(data) :
     """muons and mumu have alt in all bins"""
@@ -69,6 +68,6 @@ class data_55_0btag(data) :
 
         self._mcExtraBeforeTrigger = {}
         self._mcExtraBeforeTrigger["mcHad"]  = tuple([(ttw+zinv if ttw!=None and zinv!=None else None) for ttw,zinv in zip(self._mcExpectationsBeforeTrigger["mcTtw"], self._mcExpectationsBeforeTrigger["mcZinv"])])
-        self._mcStatError["mcHadErr"] = tuple([utils.quadSum([x,y]) for x,y in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
+        self._mcStatError["mcHadErr"] = tuple([quadSum([x,y]) for x,y in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
 
         syst.load(self, mode = self.systMode)

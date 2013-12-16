@@ -17,10 +17,16 @@ def itMult(l1 = [], l2 = []) :
     return tuple([a*b if a!=None else None for a,b in zip(l1,l2)])
 
 def _trigKey(sample = "") :
-    d = {"mcTtw":"had", "mcZinv":"had", "mcHad": "had",
-         "mcMumu":"mumu", "mcMuon":"muon", "mcPhot":"phot",
-         "mcSimple":"simple", # legacy for simple
-         "mcZmumu":"mumu" # legacy for orig
+    d = {"mcTtw":"had",
+         "mcZinv":"had",
+         "mcHad": "had",
+         "mcMumu":"mumu",
+         "mcMuon":"muon",
+         "mcPhot":"phot",
+         ## legacy
+         "mcSimple":"simple", # simple
+         "mcZmumu":"mumu",  # orig
+         "mcGjets":"phot", # many
          }
     if sample not in d :
         for key,value in d.iteritems() :

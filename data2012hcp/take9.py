@@ -1,5 +1,5 @@
-from inputData import syst
-from data import data
+from inputData import syst, data
+
 
 def common(x, systMode = 12400) :
     x._htBinLowerEdges = ( 275.0, 325.0, 375.0, 475.0, 575.0, 675.0, 775.0, 875.0, 975.0, 1.075e+03, )

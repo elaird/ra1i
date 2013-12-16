@@ -48,7 +48,7 @@ def walk(skip=[]):
         if os.path.islink(dirName) or not os.path.isdir(dirName):
             continue
         for fileName in os.listdir(dirName):
-            if fileName == "__init__.py" or fileName.endswith(".pyc"):
+            if fileName == "__init__.py" or fileName.endswith(".pyc") or fileName.endswith("~"):
                 continue
             t = (dirName, fileName)
             (passed if check(*t) else failed).append(t)
@@ -66,5 +66,5 @@ def report(passed=[], failed=[]):
     dump(failed)
 
 
-import data
-report(*walk(skip=["data2011old"]))
+import inputData
+report(*walk(skip=[]))

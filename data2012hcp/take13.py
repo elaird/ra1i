@@ -1,5 +1,5 @@
-from data import data
-import utils
+from inputData import data, quadSum
+
 
 def common1(x) :
     x._lumi = {
@@ -28,7 +28,7 @@ def common1(x) :
 
     uncs = {"btagUncert": 0.035, "lumi": 0.06, "deadEcal": 0.03, "lepVetoes": 0.025, "jesjer": 0.025, "pdf": 0.10} # SMS other than T1, T2
     uncs["btagUncert"] = 0.12 #T1, T2, cMSSM tb10 only
-    return utils.quadSum(uncs.values())
+    return quadSum(uncs.values())
 
 def common(x) :
     lumiLikeValue = common1(x)
@@ -72,7 +72,7 @@ def common(x) :
         "sigmaMuonW": systMagnitudes,
         "sigmaMumuZ": systMagnitudes,
         "k_qcd_nom":2.96e-2,
-        "k_qcd_unc_inp":utils.quadSum([0.61e-2, 0.463e-2])
+        "k_qcd_unc_inp":quadSum([0.61e-2, 0.463e-2])
         }
 
 class data_0b_ge4j(data) :
