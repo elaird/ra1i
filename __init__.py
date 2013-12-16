@@ -1,6 +1,10 @@
 import math
 
 
+pb = 1.0
+fb = 1.0e-3*pb
+
+
 def quadSum(l) :
     return math.sqrt(sum([x**2 for x in l]))
 
