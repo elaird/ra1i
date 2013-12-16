@@ -1,6 +1,5 @@
-from inputData import syst
-import utils
-from data import data,scaled,excl
+from inputData import data, scaled, excl, syst
+
 
 class data_55_0btag(data) :
     """muons and mumu have alt in all bins"""

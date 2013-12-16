@@ -1,5 +1,4 @@
-from inputData import syst
-from data import data
+from inputData import data
 
 class data_simple(data) :
     """one bin test data"""

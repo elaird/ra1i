@@ -1,5 +1,5 @@
-from data import data
-import utils
+from inputData import data, quadSum
+
 
 def common1(x) :
     x._lumi =  {"muon"  : 1.139e+04, "mcMuon": 1.139e+04,
@@ -64,7 +64,7 @@ def common(x) :
         "sigmaMuonW": systMagnitudes,
         "sigmaMumuZ": systMagnitudes,
         "k_qcd_nom":2.96e-2,
-        "k_qcd_unc_inp":utils.quadSum([0.61e-2, 0.463e-2])
+        "k_qcd_unc_inp":quadSum([0.61e-2, 0.463e-2])
         }
 
 class data_0b_ge4j(data) :

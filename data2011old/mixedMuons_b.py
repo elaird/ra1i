@@ -1,6 +1,5 @@
-from inputData import syst 
-import utils
-from data import data,scaled,excl
+from inputData import data, scaled, excl, syst, quadSum
+
 
 class data_55_v1(data) :
     """muons and mumu have no alt cut for highest six bins"""
@@ -61,7 +60,7 @@ class data_55_v1(data) :
             "mcMumuErr"          :   ( 2.759, 2.112, 3.556, 2.387, 1.842, 1.12, 0.6277, 0.826, ) ,
             "mcGjetsErr": (None,  None,   10,    7,    5,    3,    2,    2),
             }
-        #self._mcStatError["mcHadErr"] = tuple([utils.quadSum([ttwErr, zinvErr]) for ttwErr,zinvErr in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
+        #self._mcStatError["mcHadErr"] = tuple([quadSum([ttwErr, zinvErr]) for ttwErr,zinvErr in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
 
         self._purities = {
             "phot":                  (  None,    None,    0.98,   0.99,   0.99,   0.99,   0.99, 0.99),

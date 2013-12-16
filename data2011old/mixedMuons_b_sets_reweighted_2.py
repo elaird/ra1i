@@ -1,6 +1,5 @@
-from inputData import syst
-import utils
-from data import data,scaled,excl
+from inputData import data, scaled, excl, syst, quadSum
+
 
 class data_55_0btag(data) :
     """muons and mumu have no alt cut for highest six bins"""
@@ -71,7 +70,7 @@ class data_55_0btag(data) :
 
         self._mcExtraBeforeTrigger = {}
         self._mcExtraBeforeTrigger["mcHad"]  = tuple([(ttw+zinv if ttw!=None and zinv!=None else None) for ttw,zinv in zip(self._mcExpectationsBeforeTrigger["mcTtw"], self._mcExpectationsBeforeTrigger["mcZinv"])])
-        self._mcStatError["mcHadErr"] = tuple([utils.quadSum([x,y]) for x,y in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
+        self._mcStatError["mcHadErr"] = tuple([quadSum([x,y]) for x,y in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
         syst.load(self, mode = self.systMode)
 
 class data_55_1btag(data) :
@@ -146,7 +145,7 @@ class data_55_1btag(data) :
 
         self._mcExtraBeforeTrigger = {}
         self._mcExtraBeforeTrigger["mcHad"]  = tuple([(ttw+zinv if ttw!=None and zinv!=None else None) for ttw,zinv in zip(self._mcExpectationsBeforeTrigger["mcTtw"], self._mcExpectationsBeforeTrigger["mcZinv"])])
-        self._mcStatError["mcHadErr"] = tuple([utils.quadSum([x,y]) for x,y in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
+        self._mcStatError["mcHadErr"] = tuple([quadSum([x,y]) for x,y in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
         syst.load(self, mode = self.systMode)
 
 class data_55_2btag(data) :
@@ -220,7 +219,7 @@ class data_55_2btag(data) :
 
         self._mcExtraBeforeTrigger = {}
         self._mcExtraBeforeTrigger["mcHad"]  = tuple([(ttw+zinv if ttw!=None and zinv!=None else None) for ttw,zinv in zip(self._mcExpectationsBeforeTrigger["mcTtw"], self._mcExpectationsBeforeTrigger["mcZinv"])])
-        self._mcStatError["mcHadErr"] = tuple([utils.quadSum([x,y]) for x,y in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
+        self._mcStatError["mcHadErr"] = tuple([quadSum([x,y]) for x,y in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
         syst.load(self, mode = self.systMode)
 
 class data_55_gt2btag(data) :
@@ -295,7 +294,7 @@ class data_55_gt2btag(data) :
 
         self._mcExtraBeforeTrigger = {}
         self._mcExtraBeforeTrigger["mcHad"]  = tuple([(ttw+zinv if ttw!=None and zinv!=None else None) for ttw,zinv in zip(self._mcExpectationsBeforeTrigger["mcTtw"], self._mcExpectationsBeforeTrigger["mcZinv"])])
-        self._mcStatError["mcHadErr"] = tuple([utils.quadSum([x,y]) for x,y in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
+        self._mcStatError["mcHadErr"] = tuple([quadSum([x,y]) for x,y in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
         syst.load(self, mode = self.systMode)
 
 class data_55_gt0btag(data) :
@@ -361,7 +360,7 @@ class data_55_gt0btag(data) :
             "mcHadErr"           :   ( 18.69, 10.78, 10.4, 9.037, 3.962, 3.168, 0.8402, 0.5788, ) ,
             "mcGjetsErr": (None,  None,   10,    7,    5,    3,    2,    2),
             }
-        #self._mcStatError["mcHadErr"] = tuple([utils.quadSum([ttwErr, zinvErr]) for ttwErr,zinvErr in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
+        #self._mcStatError["mcHadErr"] = tuple([quadSum([ttwErr, zinvErr]) for ttwErr,zinvErr in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
 
         self._purities = {
             "phot":                  (  None,    None,    0.98,   0.99,   0.99,   0.99,   0.99, 0.99),
@@ -369,5 +368,5 @@ class data_55_gt0btag(data) :
 
         self._mcExtraBeforeTrigger = {}
         self._mcExtraBeforeTrigger["mcHad"]  = tuple([(ttw+zinv if ttw!=None and zinv!=None else None) for ttw,zinv in zip(self._mcExpectationsBeforeTrigger["mcTtw"], self._mcExpectationsBeforeTrigger["mcZinv"])])
-        self._mcStatError["mcHadErr"] = tuple([utils.quadSum([x,y]) for x,y in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
+        self._mcStatError["mcHadErr"] = tuple([quadSum([x,y]) for x,y in zip(self._mcStatError["mcTtwErr"], self._mcStatError["mcZinvErr"])])
         syst.load(self, mode = self.systMode)

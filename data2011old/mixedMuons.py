@@ -1,5 +1,5 @@
-from inputData import syst
-from data import data,scaled,excl
+from inputData import data, scaled, excl, syst
+
 
 class data_55_v1(data) :
     """muons and mumu have no alt cut for highest six bins"""
