@@ -1,5 +1,4 @@
-from inputData.units import fb
-from inputData import data, quadSum
+from inputData import data, quadSum, fb
 
 
 def common1(x) :
