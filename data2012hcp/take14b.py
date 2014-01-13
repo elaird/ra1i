@@ -30,17 +30,14 @@ def common1(x) :
             "1b_ge4j":[0.93, 0.92, 0.93, 0.99, 1.03, 1.03, 1.02, 1.03],
             "2b_ge4j":[0.93, 0.92, 0.93, 1.00, 1.03, 1.06, 1.02, 1.02],
             "3b_ge4j":[1.00, 0.92, 0.94, 1.00, 1.05, 1.04, 1.03, 1.02],
-            "4b_ge4j":[1.00, 0.94, 0.93, 1.00, 1.08, 1.00, 1.02, 1.02]}
+            "4b_ge4j":[1.00, 0.94, 0.93, 1.00, 1.08, 1.00, 1.02, 1.02]
+            }[x.__class__.__name__[-7:]]
 
-    cat =  x.__class__.__name__[-7:]
-    corrs = corr[cat]
-
-    x._mcExpectationsBeforeTrigger
     mcZinv = x._mcExpectationsBeforeTrigger["mcZinv"]
     mcZinvErr = x._mcStatError["mcZinvErr"]
 
-    x._mcExpectationsBeforeTrigger["mcZinv"] = map(lambda y,z: y*z, mcZinv, corrs)
-    x._mcStatError["mcZinvErr"] = map(lambda y,z: y*z, mcZinvErr, corrs)
+    x._mcExpectationsBeforeTrigger["mcZinv"] = map(lambda y,z: y*z, mcZinv, corr)
+    x._mcStatError["mcZinvErr"] = map(lambda y,z: y*z, mcZinvErr, corr)
 
             
 def common(x) :
