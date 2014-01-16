@@ -207,6 +207,12 @@ NOTES
             for key, value in d.iteritems():
                 getattr(self, "_%s" % item)[key] = tuple(map(lambda x: math.sqrt(x), value))
 
+    def _mergeEfficiency(self, nBins):
+        # check that, e.g. (0, 1, 2, 3, 4, 5) --> (0, 1, 2, 3, 3, 3)
+        nFinal = self._mergeBins.count(self._mergeBins[-1])
+        ini = self._mergeBins[:len(self._mergeBins) - nFinal]
+        assert list(ini) == range(len(ini)), ini
+
     def _doBinMerge(self):
         if self._mergeBins is None:
             return
@@ -217,18 +223,8 @@ NOTES
         self._mergeHtBinLowerEdges(nBins)
         self._mergeCounts(nBins, items=["observations", "mcExpectationsBeforeTrigger", "mcExpectations"])
         self._mergeErrors(nBins, items=["mcStatError"])
-        print "ERROR: Implement trigger efficiency merging."
+        self._mergeEfficiency(nBins)
 
     #define functions called by outside world
     for item in vars+["mcExpectations"]:
         exec('def %s(self): return self._%s' % (item, item))
-
-    def mergeEfficiency(self, inList):
-        mergeSpec = self.mergeBins()
-        if not mergeSpec:
-            return inList
-        l = sorted(list(set(mergeSpec)))
-        out = [0]*len(l)
-        for index, value in enumerate(inList):
-            out[mergeSpec[index]] += value
-        return out
