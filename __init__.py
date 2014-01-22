@@ -209,6 +209,7 @@ NOTES
 
     def _mergeEfficiency(self, nBins):
         # check that, e.g. (0, 1, 2, 3, 4, 5) --> (0, 1, 2, 3, 3, 3)
+        # (formerly checked in pickling.effHistos)
         nFinal = self._mergeBins.count(self._mergeBins[-1])
         ini = self._mergeBins[:len(self._mergeBins) - nFinal]
         assert list(ini) == range(len(ini)), ini
