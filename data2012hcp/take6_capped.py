@@ -1,4 +1,4 @@
-from inputData import data, scaled, syst
+from inputData import data, syst
 
 #weights capped to 5
 

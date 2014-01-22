@@ -1,4 +1,4 @@
-from inputData import data, scaled, syst
+from inputData import data, syst
 
 # Uncorrected caloMET
 

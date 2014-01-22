@@ -1,4 +1,4 @@
-from inputData import data, scaled, syst
+from inputData import data, syst
 
 
 def common(x, systMode = 4) :

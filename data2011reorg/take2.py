@@ -1,4 +1,4 @@
-from inputData import data, scaled, excl, syst, quadSum
+from inputData import data, excl, syst, quadSum
 
 
 ## fully predicted yields, organized into one file ##
