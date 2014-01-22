@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import ROOT as r
-from array import array
+
 
 def setup() :
     r.gROOT.SetBatch(True)
