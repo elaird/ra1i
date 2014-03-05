@@ -54,7 +54,7 @@ def common(x) :
 
     if "ge4b" in name :
         x._mergeBins = (0, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3)
-        systMagnitudes = (0.25,)
+        systMagnitudes = (0.15,)
         systBins = (0, 0, 0, 0)
     else :
         x._mergeBins = None
