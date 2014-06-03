@@ -94,11 +94,11 @@ def oneDataset(canvas = None, factors = None, data = None, name = "", iDataset =
         graphs.append(gr)
     return graphs
 
-def plot(datasets = [], tag = "", factors = ["gZ", "mumuZ", "muW"]) :
+def plot(datasets = [], tag = "", factors = ["gZ", "muW", "mumuZ"][:2]) :
     canvas = r.TCanvas("canvas", "canvas", 600, 800)
 
 
-    fileName = "plots/translation_factors_%s.pdf"%tag
+    fileName = "../plots/translation_factors_%s.pdf"%tag
     canvas.Print(fileName+"[")
     misc = []
     slices = datasets[0]["slices"] #assume first list of slices contains the subsequent ones
@@ -131,7 +131,7 @@ def plot(datasets = [], tag = "", factors = ["gZ", "mumuZ", "muW"]) :
     canvas.Print(fileName+"]")
     canvas.Clear()
 
-    ratioFileName = "plots/ratio_translation_factors_%s.pdf"%tag
+    ratioFileName = "../plots/ratio_translation_factors_%s.pdf"%tag
     canvas.Print(ratioFileName+"[")
     for name in slices:
         canvas.cd(0)
@@ -152,16 +152,17 @@ def plot(datasets = [], tag = "", factors = ["gZ", "mumuZ", "muW"]) :
 
 
 ##########
-from inputData.dataMisc import orig
-from inputData.data2011reorg import take3
-from inputData.data2012hcp import take5,take5a,take5_capped,take5_unweighted
-from inputData.data2012hcp import take6,take6_capped,take6_unweighted
-from inputData.data2012hcp import take12_weighted,take12_unweighted,take14
-from inputData.data2012dev import take0,take1,take3,take5,take5_noMHTMET
+#from inputData.dataMisc import orig
+#from inputData.data2011reorg import take3
+#from inputData.data2012hcp import take5,take5a,take5_capped,take5_unweighted
+#from inputData.data2012hcp import take6,take6_capped,take6_unweighted
+#from inputData.data2012hcp import take12_weighted,take12_unweighted,take14
+#from inputData.data2012dev import take0,take1,take3,take5,take5_noMHTMET
+from inputData.data2012pf import take1
 
 setup()
 
-d = ["2010", "2011eps", "2011", "2012ichep", "2012hcp", "2012dev"][-1]
+d = ["2010", "2011eps", "2011", "2012ichep", "2012hcp", "2012dev", "2012pf"][-1]
 if d=="2010" :
     datasets = [ {"module": orig, "slices": ["2010"], "color":r.kBlack,  "label": "2010"},
                  ]
@@ -223,5 +224,18 @@ elif d=="2012dev" :
                      ]
         #print datasets
         plot(datasets, tag = j)
+
+elif d=="2012pf" :
+    color1 = {"ge2j":r.kBlack, "ge4j":r.kRed,    "le3j":r.kBlue}
+    color2 = {"ge2j":r.kGray,  "ge4j":r.kOrange, "le3j":r.kCyan}
+
+    for i,j in enumerate(["ge4j", "le3j"]) :
+        bs = ["0b", "1b", "2b", "3b"]
+        slices = ["%s_%s"%(b,j) for b in bs]
+        datasets = [ {"module": take1, "slices": slices, "color":color1[j], "label": "2012 pf (%s, weighted)"%j},
+                     ]
+
+        plot(datasets, tag = j)
+        
 else :
     print "ERROR: dataset not recognized."
