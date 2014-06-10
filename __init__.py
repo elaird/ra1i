@@ -60,22 +60,23 @@ class data(object):
         self._applyTrigger()
         self._doBinMerge()
 
-    def __str__(self, notes=False):
+    def __str__(self, notes=True):
         out = ""
+        if notes:
+            out += r'''
+NOTES
+-----
+
+- all numbers are after the trigger, i.e.
+-- the (non-bulk) observations are integers
+-- nHadBulk is raw; nHadBulkTriggerCorrected is multiplied by trgEff(had) / trgEff(bulk)
+-- the appropriate MC samples are scaled down to emulate trigger inefficiency
+'''
         for func in ["observations", "mcExpectations", "mcStatError"]:
             out += "\n".join(["", func, "-"*20, ""])
             d = getattr(self, func)()
             for key in sorted(d.keys()):
                 out += "%s %s\n" % (key, d[key])
-            if notes:
-                out += r'''
-NOTES
------
-
-- all numbers are after the trigger, i.e.
--- the observations are integers
--- the appropriate MC samples are scaled down to emulate trigger inefficiency
-'''
         return out
 
     def translationFactor(self, tr=["gZ", "muW", "mumuZ", "muHad"][0], considerLumi=False, afterTrigger=True):
@@ -149,6 +150,13 @@ NOTES
             setattr(self, "_%s" % s, {})
             for sample, t in getattr(self, "_%sBeforeTrigger" % s).iteritems():
                 getattr(self, "_%s" % s)[sample] = itMult(t, self._triggerEfficiencies[_trigKey(sample)])
+
+        l = []
+        obs = self.observations()
+        trg = self.triggerEfficiencies()
+        for nHadBulkValue, hadTrgEff, hadBulkTrgEff in zip(obs["nHadBulk"], trg["had"], trg["hadBulk"]):
+            l.append(nHadBulkValue * hadTrgEff / hadBulkTrgEff)
+        self._observations["nHadBulkTriggerCorrected"] = tuple(l)
 
     def _mergeChecks(self):
         assert len(self._mergeBins) == len(self._htBinLowerEdges)
