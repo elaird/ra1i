@@ -154,9 +154,10 @@ NOTES
         l = []
         obs = self.observations()
         trg = self.triggerEfficiencies()
-        for nHadBulkValue, hadTrgEff, hadBulkTrgEff in zip(obs["nHadBulk"], trg["had"], trg["hadBulk"]):
-            l.append(nHadBulkValue * hadTrgEff / hadBulkTrgEff)
-        self._observations["nHadBulkTriggerCorrected"] = tuple(l)
+        if "nHadBulk" in obs:
+            for nHadBulkValue, hadTrgEff, hadBulkTrgEff in zip(obs["nHadBulk"], trg["had"], trg["hadBulk"]):
+                l.append(nHadBulkValue * hadTrgEff / hadBulkTrgEff)
+            self._observations["nHadBulkTriggerCorrected"] = tuple(l)
 
     def _mergeChecks(self):
         assert len(self._mergeBins) == len(self._htBinLowerEdges)
