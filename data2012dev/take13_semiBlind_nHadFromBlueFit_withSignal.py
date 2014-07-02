@@ -39,8 +39,7 @@ def common(x) :
     systBins = tuple([0]*1 + [1]*1 + [2]*1 + [3]*2 + [4]*2 + [5]*2 + [6]*2)
     name = x.__class__.__name__
     
-    #dm10_250_sumWeightIn = 473154.
-    dm10_250_sumWeightIn = 1.0
+    dm10_250_xs = 5.6
 
     if "0b_ge4j" in name:
         effHad = [1.73e-06, 4.85e-05, 1.20e-04, 1.90e-04, 2.15e-04, 1.15e-04, 7.62e-05, 5.74e-05, 2.65e-05, 1.97e-05, 2.04e-05]
@@ -75,7 +74,7 @@ def common(x) :
         x._observations["nHadBulk"] = (6.60088E07, 1.400533E08, 5.2689525E07, 4.8204025E07, 3.35079E07,
                                        1.582655E07, 7.279475E06, 3.46345E06, 1.732725E06, 8.9562E05, 1.142775E06)
 
-    x._observations["nHad"] =  [m+(y*dm10_250_sumWeightIn*x._lumi["had"]*z) for m,y,z in zip(x._observations["nHad"],effHad, x._triggerEfficiencies["had"])]
+    x._observations["nHad"] =  [m+(y*dm10_250_xs*x._lumi["had"]*z) for m,y,z in zip(x._observations["nHad"],effHad, x._triggerEfficiencies["had"])]
 
     if "ge4b" in name :
         x._mergeBins = (0, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3)
