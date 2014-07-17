@@ -171,7 +171,7 @@ def oneDataset(canvas = None, legend=None, val=None, valErr=None,
     graphs.append(gr)
     return graphs
 
-def plot(dataset = {}, tag = "", factors = ["gZ", "muW", "mumuZ"][:2], individual=False) :
+def plot(dataset = {}, tag = "", factors = ["gZ", "muW", "mumuZ"][1:2], individual=False) :
     slices = dataset["slices"] #assume first list of slices contains the subsequent ones
     module = dataset["module"]
     tests  = {"alphaT":{"num": getattr(module,"data_%s"%slices["ge55"])(),
@@ -179,7 +179,7 @@ def plot(dataset = {}, tag = "", factors = ["gZ", "muW", "mumuZ"][:2], individua
                         "sample": "muon",
                         "markerStyle":24,
                         "label": "#alpha_{T} < 0.55 #rightarrow #alpha_{T} > 0.55 (#mu + jets)"},
-
+              
               "zeroBtoOneB":{"num": getattr(module,"data_%s"%slices["1b"])(),
                              "den": getattr(module,"data_%s"%slices["0b"])(),
                              "sample": "muon",
@@ -198,11 +198,11 @@ def plot(dataset = {}, tag = "", factors = ["gZ", "muW", "mumuZ"][:2], individua
                                     "markerStyle":32,
                                     "label": "2 #leq N_{jet} #leq 3 #rightarrow N_{jet} #geq 4 (#mu + jets)"},
               
-              "jBinOneTojBinTwoPhot":{"num": getattr(module,"data_%s"%slices["ge4j"])(),
-                                      "den": getattr(module,"data_%s"%slices["le3j"])(),
-                                      "sample": "phot",
-                                      "markerStyle":27,
-                                      "label": "2 #leq N_{jet} #leq 3 #rightarrow N_{jet} #geq 4 (#gamma + jets)"},
+              #"jBinOneTojBinTwoPhot":{"num": getattr(module,"data_%s"%slices["ge4j"])(),
+              #                        "den": getattr(module,"data_%s"%slices["le3j"])(),
+              #                        "sample": "phot",
+              #                        "markerStyle":27,
+              #                        "label": "2 #leq N_{jet} #leq 3 #rightarrow N_{jet} #geq 4 (#gamma + jets)"},
               }
 
 
@@ -289,7 +289,7 @@ def plot(dataset = {}, tag = "", factors = ["gZ", "muW", "mumuZ"][:2], individua
         finish(canvas,fileName)
 
 ##########
-from inputData.data2012pf import take1, take1_calo, take1_noSideBand, take1_noXsWeightsOrIsrOrHTSideBandandUsedLoForWandTT
+from inputData.data2012pf import take1, take1_calo, take2_calo, take2_calo_200, take2_calo_noHT
 from inputData.data2012dev import take13
 
 setup()
@@ -304,14 +304,14 @@ if d=="2012pf" :
         slices = zip(bs,["%s_%s"%(b,j) for b in bs])
         slices += zip(["ge4j", "le3j"],["ge4j", "le3j"])
         slices += zip(["ge55","l55"],["%s_%s"%(aT,j) for aT in ["ge55","l55"]])
-        datasets = [{"name": "pf", "module": take1, "slices": dict(slices), "color":color1[j]},
-                    {"name": "calo", "module": take1_calo, "slices": dict(slices), "color":color1[j]}
+        datasets = [#{"name": "pf", "module": take1, "slices": dict(slices), "color":color1[j]},
+                    {"name": "calo", "module": take2_calo_200, "slices": dict(slices), "color":color1[j]}
                     #{"name": "pf_puBtagLO", "module": take1_noXsWeightsOrIsrOrHTSideBandandUsedLoForWandTT, "slices": dict(slices), "color":color1[j]},
                     #{"name": "IC_calo", "module": take13, "slices": dict(slices), "color":color1[j]},
                     ]
         
         for dct in datasets:
-            for switch in [True,False][1:]:
+            for switch in [True,False][:1]:
                 plot(dct, tag = j, individual=switch)
         
 else :
