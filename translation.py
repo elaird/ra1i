@@ -57,7 +57,7 @@ def plotRatio(canvas=None, factors=None, graphs=None, data=None, name=None, data
         graphsToReturn.append(rgr)
     return graphsToReturn
 
-def oneDataset(canvas = None, factors = None, data = None, name = "", iDataset = 0, color = None, afterTrigger = False) :
+def oneDataset(canvas = None, factors = None, data = None, name = "", iDataset = 0, color = None, afterTrigger = True) :
     htMeans = data.htMeans()
 
     #if htMeans[-1]<1000. :
@@ -97,7 +97,6 @@ def oneDataset(canvas = None, factors = None, data = None, name = "", iDataset =
 def plot(datasets = [], tag = "", factors = ["gZ", "muW", "mumuZ"][:2]) :
     canvas = r.TCanvas("canvas", "canvas", 600, 800)
 
-
     fileName = "../plots/translation_factors_%s.pdf"%tag
     canvas.Print(fileName+"[")
     misc = []
@@ -106,7 +105,7 @@ def plot(datasets = [], tag = "", factors = ["gZ", "muW", "mumuZ"][:2]) :
         canvas.cd(0)
         canvas.Clear()
         canvas.Divide(1, 3)
-        leg = r.TLegend(0.5, 0.92, 0.9, 0.98)
+        leg = r.TLegend(0.5, 0.92, 0.8, 0.96)
         leg.SetFillStyle(0)
         leg.SetBorderSize(0)
 
@@ -152,13 +151,8 @@ def plot(datasets = [], tag = "", factors = ["gZ", "muW", "mumuZ"][:2]) :
 
 
 ##########
-#from inputData.dataMisc import orig
-#from inputData.data2011reorg import take3
-#from inputData.data2012hcp import take5,take5a,take5_capped,take5_unweighted
-#from inputData.data2012hcp import take6,take6_capped,take6_unweighted
-#from inputData.data2012hcp import take12_weighted,take12_unweighted,take14
-#from inputData.data2012dev import take0,take1,take3,take5,take5_noMHTMET
-from inputData.data2012pf import take1
+from inputData.data2012dev import take13
+from inputData.data2012pf import take7_calo, take7_pf,take6_calo, take21_calo, take21_pf
 
 setup()
 
@@ -232,7 +226,10 @@ elif d=="2012pf" :
     for i,j in enumerate(["ge4j", "le3j"]) :
         bs = ["0b", "1b", "2b", "3b"]
         slices = ["%s_%s"%(b,j) for b in bs]
-        datasets = [ {"module": take1, "slices": slices, "color":color1[j], "label": "2012 pf (%s, weighted)"%j},
+        datasets = [ #{"module": take13, "slices": slices, "color":color1[j], "label": "2012 calo RA1 %s"%j},
+                     #{"module": take21_calo, "slices": slices, "color":color2[j], "label": "2012 calo %s"%j},
+                     {"module": take21_pf, "slices": slices, "color":color1[j], "label": "2012 pf %s"%j},
+                     #{"module": take6_calo, "slices": slices, "color":color1[j], "label": "2012 calo %s buggy"%j},
                      ]
 
         plot(datasets, tag = j)
