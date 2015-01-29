@@ -201,7 +201,8 @@ NOTES
                     if value is None:
                         d[key][self._mergeBins[index]] = None
                     else:
-                        d[key][self._mergeBins[index]] += value
+                        if d[key][self._mergeBins[index]] is not None :
+                            d[key][self._mergeBins[index]] += value
 
             for key, value in d.iteritems():
                 getattr(self, "_%s" % item)[key] = tuple(value)
