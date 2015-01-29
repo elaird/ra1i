@@ -72,7 +72,7 @@ NOTES
 -- nHadBulk is raw; nHadBulkTriggerCorrected is multiplied by trgEff(had) / trgEff(bulk)
 -- the appropriate MC samples are scaled down to emulate trigger inefficiency
 '''
-        for func in ["observations", "mcExpectations", "mcStatError"]:
+        for func in ["observations", "mcExpectationsBeforeTrigger", "mcStatError"]:
             out += "\n".join(["", func, "-"*20, ""])
             d = getattr(self, func)()
             for key in sorted(d.keys()):
