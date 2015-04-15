@@ -6,7 +6,8 @@ from rootToTxt import printAll as go
 ewk = ["Zinv", "WJets", "SingleTop", "DiBoson", "DY", "TTbar", "Photon"]
 obs = ["Data"]
 
-go(dir="/home/hep/elaird1/122_numbers_from_darren/v7_new_bin",
+go(#dir="/home/hep/elaird1/122_numbers_from_darren/v7_new_bin",
+   dir="/vols/ssd00/cms/clucas/susy_stats/rootfiles/Root_Files_30Mar_approved0p55_dPhi_gt0p3_inHadOnly_newCC_CSCBeamHalo_hcalDeadECAL_v0/RootFiles/",
    files={"0b_le3j":   "RA1_Stats_btag_eq0_category_eq2_and_3.root",
           "0b_ge4j":   "RA1_Stats_btag_eq0_category_greq4.root",
           "1b_le3j":   "RA1_Stats_btag_eq1_category_eq2_and_3.root",
