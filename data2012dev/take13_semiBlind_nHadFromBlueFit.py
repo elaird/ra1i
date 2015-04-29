@@ -61,10 +61,9 @@ def common(x) :
         systBins = (0, 0, 0, 0)
 
     elif "2b" in name or "3b" in name:
-            x._mergeBins = (0, 1, 2, 3, 4, 5, 6, 7, 8, 8, 8)
-            systBins = tuple([0]*1 + [1]*1 + [2]*1 + [3]*2 + [4]*2 + [5]*2)# + [6]*2)
-            systMagnitudes = systMagnitudes[:-1]
-
+        x._mergeBins = (0, 1, 2, 3, 4, 5, 6, 7, 8, 8, 8)
+        systBins = tuple([0]*1 + [1]*1 + [2]*1 + [3]*2 + [4]*2 + [5]*2)# + [6]*2)
+        systMagnitudes = systMagnitudes[:-1]
     else :
         x._mergeBins = None
 
