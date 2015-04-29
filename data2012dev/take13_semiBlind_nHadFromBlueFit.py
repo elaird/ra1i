@@ -32,6 +32,9 @@ def common1(x) :
     iPhot = 3
     x._observations["nPhot"] = tuple([None]*iPhot + list(x._observations["nPhot"][iPhot:]))
 
+    iBin = 0
+    for sample in ["nPhot","nMuon","nMumu","nHad"] :
+        x._observations[sample] = tuple([None]*iBin + list(x._observations[sample][iBin:]))
 
 def common(x) :
     common1(x)

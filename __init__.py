@@ -60,22 +60,23 @@ class data(object):
         self._applyTrigger()
         self._doBinMerge()
 
-    def __str__(self, notes=False):
+    def __str__(self, notes=True):
         out = ""
-        for func in ["observations", "mcExpectations", "mcStatError"]:
-            out += "\n".join(["", func, "-"*20, ""])
-            d = getattr(self, func)()
-            for key in sorted(d.keys()):
-                out += "%s %s\n" % (key, d[key])
-            if notes:
-                out += r'''
+        if notes:
+            out += r'''
 NOTES
 -----
 
 - all numbers are after the trigger, i.e.
--- the observations are integers
+-- the (non-bulk) observations are integers
+-- nHadBulk is raw; nHadBulkTriggerCorrected is multiplied by trgEff(had) / trgEff(bulk)
 -- the appropriate MC samples are scaled down to emulate trigger inefficiency
 '''
+        for func in ["observations", "mcExpectationsBeforeTrigger", "mcStatError"]:
+            out += "\n".join(["", func, "-"*20, ""])
+            d = getattr(self, func)()
+            for key in sorted(d.keys()):
+                out += "%s %s\n" % (key, d[key])
         return out
 
     def translationFactor(self, tr=["gZ", "muW", "mumuZ", "muHad"][0], considerLumi=False, afterTrigger=True):
@@ -150,6 +151,14 @@ NOTES
             for sample, t in getattr(self, "_%sBeforeTrigger" % s).iteritems():
                 getattr(self, "_%s" % s)[sample] = itMult(t, self._triggerEfficiencies[_trigKey(sample)])
 
+        l = []
+        obs = self.observations()
+        trg = self.triggerEfficiencies()
+        if "nHadBulk" in obs:
+            for nHadBulkValue, hadTrgEff, hadBulkTrgEff in zip(obs["nHadBulk"], trg["had"], trg["hadBulk"]):
+                l.append(nHadBulkValue * hadTrgEff / hadBulkTrgEff)
+            self._observations["nHadBulkTriggerCorrected"] = tuple(l)
+
     def _mergeChecks(self):
         assert len(self._mergeBins) == len(self._htBinLowerEdges)
         for a, b in zip(self._mergeBins, sorted(self._mergeBins)):
@@ -192,7 +201,8 @@ NOTES
                     if value is None:
                         d[key][self._mergeBins[index]] = None
                     else:
-                        d[key][self._mergeBins[index]] += value
+                        if d[key][self._mergeBins[index]] is not None :
+                            d[key][self._mergeBins[index]] += value
 
             for key, value in d.iteritems():
                 getattr(self, "_%s" % item)[key] = tuple(value)
